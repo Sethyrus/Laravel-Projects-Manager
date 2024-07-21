@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('key')->unique();
             $table->text('value');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->unique(['key', 'user_id']);
             $table->timestamps();
         });
     }

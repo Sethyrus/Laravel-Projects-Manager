@@ -13,15 +13,11 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasFactory, Notifiable, HasApiTokens;
 
     /**
-     * The attributes that are mass assignable.
+     * The attributes that aren't mass assignable.
      *
-     * @var array<int, string>
+     * @var array
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -44,5 +40,13 @@ class User extends Authenticatable implements MustVerifyEmail
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * The teams the user is in
+     */
+    public function teams()
+    {
+        return $this->belongsToMany(Team::class);
     }
 }
