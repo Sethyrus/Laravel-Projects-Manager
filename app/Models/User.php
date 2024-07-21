@@ -43,6 +43,14 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * The teams the user owns
+     */
+    public function ownedTeams()
+    {
+        return $this->hasMany(Team::class, 'owner_id');
+    }
+
+    /**
      * The teams the user is in
      */
     public function teams()

@@ -41,6 +41,7 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        // Se crea el equipo por defecto del usuario
         $user->teams()->create([
             'name' => $user->name . "'s Team",
             'description' => 'Default team for ' . $user->name,
