@@ -17,19 +17,18 @@ class TaskStatus extends Model
     protected $guarded = [];
 
     /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
+     * Get the project that the task status belongs to
      */
-    protected $hidden = [];
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
 
     /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
+     * Get the tasks that belong to the task status
      */
-    protected function casts(): array
+    public function tasks()
     {
-        return [];
+        return $this->hasMany(Task::class);
     }
 }

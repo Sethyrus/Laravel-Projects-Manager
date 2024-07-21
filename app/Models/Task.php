@@ -17,19 +17,58 @@ class Task extends Model
     protected $guarded = [];
 
     /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
+     * Get the project that the task belongs to
      */
-    protected $hidden = [];
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
 
     /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
+     * Get the task status that the task belongs to
      */
-    protected function casts(): array
+    public function status()
     {
-        return [];
+        return $this->belongsTo(TaskStatus::class);
+    }
+
+    /**
+     * Get the users that the task belongs to
+     */
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
+    /**
+     * Get the timings that belong to the task
+     */
+    public function timings()
+    {
+        return $this->hasMany(TaskTiming::class);
+    }
+
+    /**
+     * Get the comments that belong to the task
+     */
+    public function comments()
+    {
+        return $this->hasMany(TaskComment::class);
+    }
+
+    /**
+     * Get the attachments that belong to the task
+     */
+    public function attachments()
+    {
+        return $this->hasMany(TaskFile::class);
+    }
+
+    /**
+     * Get the user that created the task
+     */
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by_id');
     }
 }

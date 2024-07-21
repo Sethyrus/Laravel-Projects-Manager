@@ -31,4 +31,22 @@ class Team extends Model
     {
         return $this->belongsToMany(User::class);
     }
+
+    /**
+     * Get the projects that belong to the team
+     */
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
+
+    /**
+     * Get the customers that belong to the team
+     */
+    public function customers()
+    {
+        return $this->hasMany(Customer::class);
+    }
+
+
 }

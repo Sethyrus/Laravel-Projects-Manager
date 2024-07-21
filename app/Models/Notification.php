@@ -17,19 +17,10 @@ class Notification extends Model
     protected $guarded = [];
 
     /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
+     * Get the user that the notification belongs to
      */
-    protected $hidden = [];
-
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
+    public function user()
     {
-        return [];
+        return $this->belongsTo(User::class);
     }
 }

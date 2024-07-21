@@ -17,19 +17,10 @@ class CustomerCustomField extends Model
     protected $guarded = [];
 
     /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
+     * Get the customer that the custom field belongs to
      */
-    protected $hidden = [];
-
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
+    public function customer()
     {
-        return [];
+        return $this->belongsTo(Customer::class);
     }
 }

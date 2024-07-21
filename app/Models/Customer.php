@@ -17,19 +17,26 @@ class Customer extends Model
     protected $guarded = [];
 
     /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
+     * Get the team that the customer belongs to
      */
-    protected $hidden = [];
+    public function team()
+    {
+        return $this->belongsTo(Team::class);
+    }
 
     /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
+     * Get the custom fields for the customer
      */
-    protected function casts(): array
+    public function customFields()
     {
-        return [];
+        return $this->hasMany(CustomerCustomField::class);
+    }
+
+    /**
+     * Get the projects that belong to the customer
+     */
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
     }
 }

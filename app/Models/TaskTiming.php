@@ -17,19 +17,18 @@ class TaskTiming extends Model
     protected $guarded = [];
 
     /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
+     * Get the task that the timing belongs to
      */
-    protected $hidden = [];
+    public function task()
+    {
+        return $this->belongsTo(Task::class);
+    }
 
     /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
+     * Get the user that the timing belongs to
      */
-    protected function casts(): array
+    public function user()
     {
-        return [];
+        return $this->belongsTo(User::class);
     }
 }
