@@ -5,11 +5,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/test', function () {
-    return view('test');
+    return redirect('/dashboard');
 });
 
 Route::get('/send-test-email', function () {
