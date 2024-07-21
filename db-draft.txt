@@ -1,0 +1,151 @@
+# PROJECT MANAGER DATABASE DESIGN
+# TO BE MADE WITH LARAVEL
+# Sethyrus 20240719
+
+Table: Users
+{
+    id
+    name
+    description
+    avatar
+    email
+    email_verified_at
+    password
+    remember_token
+    created_at
+    updated_at
+}
+
+Table: Teams
+{
+    id
+    name
+    description
+    owner_user_id
+    created_at
+    updated_at
+}
+
+Table: User_Team
+{
+    user_id
+    team_id
+}
+
+Table: Projects
+{
+    id
+    name
+    description
+    team_id
+    customer_id
+    created_at
+    updated_at
+}
+
+Table: Task_Statuses
+{
+    id
+    name
+    color
+    type enum["pending", "doing", "done"] // Default: "pending"
+    project_id
+    created_at
+    updated_at
+}
+
+Table: Tasks
+{
+    id
+    name
+    description
+    project_id
+    task_status_id
+    created_at
+    updated_at
+}
+
+Table: Task_User
+{
+    task_id
+    user_id
+}
+
+Table: Task_Comments
+{
+    id
+    task_id
+    user_id
+    comment
+    created_at
+    updated_at
+}
+
+Table: Task_Timings
+{
+    id
+    title
+    description
+    task_id
+    user_id
+    start_time
+    end_time
+    created_at
+    updated_at
+}
+
+Table: Task_Files
+{
+    id
+    task_id
+    user_id
+    file
+    created_at
+    updated_at
+}
+
+Table: Customers
+{
+    id
+    name
+    description
+    created_at
+    updated_at
+}
+
+Table: Customer_Team
+{
+    customer_id
+    team_id
+}
+
+Table: Customers_Custom_Fields
+{
+    id
+    name
+    value
+    customer_id
+    created_at
+    updated_at
+}
+
+Table: Notifications
+{
+    id
+    user_id
+    title
+    description
+    is_read enum["0", "1"] // Default: "0"
+    created_at
+    updated_at
+}
+
+Table: Settings
+{
+    id
+    user_id
+    key
+    value
+    created_at
+    updated_at
+}
