@@ -47,6 +47,4 @@ class Team extends Model
     {
         return $this->hasMany(Customer::class);
     }
-
-
 }
