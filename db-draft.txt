@@ -2,6 +2,8 @@
 # TO BE MADE WITH LARAVEL
 # Sethyrus 20240719
 
+# OUTDATED WITH MIGRATIONS CHANGES
+
 Table: Users
 {
     id
@@ -21,6 +23,7 @@ Table: Teams
     id
     name
     description
+    avatar
     owner_user_id
     created_at
     updated_at
@@ -109,14 +112,9 @@ Table: Customers
     id
     name
     description
+    team_id
     created_at
     updated_at
-}
-
-Table: Customer_Team
-{
-    customer_id
-    team_id
 }
 
 Table: Customers_Custom_Fields
