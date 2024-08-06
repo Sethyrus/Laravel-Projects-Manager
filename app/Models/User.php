@@ -20,6 +20,13 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $guarded = [];
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['active_team'];
+
+    /**
      * The attributes that should be hidden for serialization.
      *
      * @var array<int, string>
@@ -114,6 +121,11 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $active_team_id = $this->settings()->where('key', 'active_team_id')->where('user_id', $this->id)->first();
 
-        return $this->ownedTeams()->where('id', $active_team_id->value)->first();
+        return $this->ownedTeams()->where('id', $active_team_id?->value)->first();
+    }
+
+    public function getActiveTeamAttribute()
+    {
+        return $this->activeTeam();
     }
 }

@@ -36,26 +36,13 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
+        $user = User::factory()->create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
         event(new Registered($user));
-
-        // Create a personal team for the user
-        $team = $user->ownedTeams()->create([
-            'name' => $user->name."'s Team",
-            'owner_id' => $user->id,
-        ]);
-
-        // Sets the default team as the active team for the new user
-        $user->settings()->create([
-            'user_id' => $user->id,
-            'key' => 'active_team_id',
-            'value' => $team->id,
-        ]);
 
         Auth::login($user);
 

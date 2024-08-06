@@ -32,6 +32,9 @@ export default function NavbarUser({ user }: { user: User }) {
                     </Dropdown.Trigger>
 
                     <Dropdown.Content>
+                        <Dropdown.Link href={route("dashboard")}>
+                            {user.active_team.name}
+                        </Dropdown.Link>
                         <Dropdown.Link href={route("profile.edit")}>
                             Profile
                         </Dropdown.Link>
