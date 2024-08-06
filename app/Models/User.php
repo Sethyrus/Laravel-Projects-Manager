@@ -95,7 +95,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function settings()
     {
-        return $this->hasOne(Setting::class);
+        return $this->hasMany(Setting::class);
     }
 
     /**
@@ -104,5 +104,16 @@ class User extends Authenticatable implements MustVerifyEmail
     public function comments()
     {
         return $this->hasMany(TaskComment::class);
+    }
+
+    /**
+     * Get the user's active team
+     * It is found as a Setting, under the key 'active_team_id'
+     */
+    public function activeTeam()
+    {
+        $active_team_id = $this->settings()->where('key', 'active_team_id')->where('user_id', $this->id)->first();
+
+        return $this->ownedTeams()->where('id', $active_team_id->value)->first();
     }
 }

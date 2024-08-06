@@ -44,6 +44,19 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
+        // Create a personal team for the user
+        $team = $user->ownedTeams()->create([
+            'name' => $user->name."'s Team",
+            'owner_id' => $user->id,
+        ]);
+
+        // Sets the default team as the active team for the new user
+        $user->settings()->create([
+            'user_id' => $user->id,
+            'key' => 'active_team_id',
+            'value' => $team->id,
+        ]);
+
         Auth::login($user);
 
         return redirect(route('dashboard', absolute: false));
